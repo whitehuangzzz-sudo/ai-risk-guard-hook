@@ -1,0 +1,33 @@
+{
+  "name": "ai-okx-2000u-ai-uniswap-v4",
+  "version": "1.0.0",
+  "description": "AI Risk Guard Hook for the OKX Hook the Future hackathon on X Layer.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "forge test",
+    "build": "forge build",
+    "app:dev": "npm --prefix app run dev",
+    "app:build": "npm --prefix app run build"
+  },
+  "keywords": [
+    "okx",
+    "x-layer",
+    "uniswap-v4",
+    "hooks",
+    "defi",
+    "ai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "@uniswap/v4-core": "^1.0.2",
+    "@uniswap/v4-periphery": "^1.0.3",
+    "solmate": "^6.8.0"
+  }
+}
