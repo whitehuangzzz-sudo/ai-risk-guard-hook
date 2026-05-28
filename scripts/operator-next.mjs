@@ -6,6 +6,8 @@ const files = {
   tokens: "deployments/xlayer-demo-tokens-latest.json",
   pool: "deployments/xlayer-demo-pool-latest.json",
   summary: "deployments/submission-summary.md",
+  explorerLinks: "deployments/explorer-links.md",
+  publicSubmission: "PUBLIC_SUBMISSION.md",
 };
 const args = parseArgs(process.argv.slice(2));
 const linksProvided = Boolean(args.github && args.verify && args.demo && args.x);
@@ -15,6 +17,8 @@ const evidence = {
   demoTokens: existsSync(files.tokens),
   demoPool: existsSync(files.pool),
   submissionSummary: existsSync(files.summary),
+  explorerLinks: existsSync(files.explorerLinks),
+  publicSubmission: existsSync(files.publicSubmission),
 };
 const nextStep = resolveNextStep(evidence, linksProvided);
 
@@ -75,6 +79,23 @@ function resolveNextStep(currentEvidence, hasLinks) {
       step: "summary",
       commands: [
         'npm run submission:finalize -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
+      ],
+    };
+  }
+
+  if (!currentEvidence.explorerLinks) {
+    return {
+      step: "links",
+      commands: ["npm run submission:links"],
+    };
+  }
+
+  if (!currentEvidence.publicSubmission) {
+    return {
+      step: "public",
+      commands: [
+        'npm run submission:public -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
+        'git add PUBLIC_SUBMISSION.md && git commit -m "docs: add public deployment evidence"',
       ],
     };
   }
