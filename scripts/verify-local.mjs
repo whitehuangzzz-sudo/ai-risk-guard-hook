@@ -31,6 +31,19 @@ const commands = [
       "Keep swaps small and raise fees when volatility spikes.",
     ],
   ],
+  [
+    "npm",
+    [
+      "run",
+      "pool:init",
+      "--",
+      "0x360e68faccca8ca495c1b759fd9eee466db9fb32",
+      "0xabdE3870CD4a1CE8Bb761963b2080e21AC9d8080",
+      "0x0000000000000000000000000000000000001000",
+      "0x0000000000000000000000000000000000002000",
+      "60",
+    ],
+  ],
   ["npm", ["audit", "--audit-level=moderate"]],
 ];
 

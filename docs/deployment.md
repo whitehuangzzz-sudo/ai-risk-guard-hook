@@ -103,11 +103,23 @@ Check the transaction logs for `HookDeployed`.
 
 ## Step 4: Create a Dynamic-Fee v4 Pool
 
-Create or initialize a Uniswap v4 pool whose:
+Generate PoolManager `initialize` calldata for a dynamic-fee pool:
 
-- `hooks` field is the deployed AI Risk Guard Hook address;
-- `fee` field is `0x800000`, Uniswap v4's dynamic fee flag;
-- currencies and tick spacing match the demo pair.
+```bash
+npm run pool:init -- \
+  "$XLAYER_MAINNET_POOL_MANAGER" \
+  "$HOOK_ADDRESS" \
+  "$TOKEN0" \
+  "$TOKEN1" \
+  60
+```
+
+The script prints:
+
+- `PoolKey` with `fee = 0x800000`, Uniswap v4's dynamic fee flag;
+- `PoolId`;
+- `initialize` calldata;
+- a copy-ready `cast send` command.
 
 The Hook returns dynamic LP fee overrides only for dynamic-fee pools.
 

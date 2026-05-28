@@ -115,12 +115,18 @@ Save:
 
 ## 6. Create Dynamic-Fee Pool
 
-Create or initialize a Uniswap v4 pool with:
+Generate PoolManager `initialize` calldata:
 
-- `hooks = $HOOK_ADDRESS`
-- `fee = 0x800000`
-- `tickSpacing = 60`
-- your chosen token pair
+```bash
+npm run pool:init -- \
+  "$XLAYER_MAINNET_POOL_MANAGER" \
+  "$HOOK_ADDRESS" \
+  "$TOKEN0" \
+  "$TOKEN1" \
+  60
+```
+
+Run the printed `castCommand`.
 
 Save:
 

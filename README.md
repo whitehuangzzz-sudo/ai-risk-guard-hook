@@ -128,6 +128,7 @@ npm run mine:hook -- "$HOOK_DEPLOYER_ADDRESS" "$XLAYER_MAINNET_POOL_MANAGER" "$O
 Generate `setPolicy` and `setRiskMode` calldata:
 
 ```bash
+npm run pool:init -- "$XLAYER_MAINNET_POOL_MANAGER" "$HOOK_ADDRESS" "$TOKEN0" "$TOKEN1" 60
 npm run policy:calldata -- "$HOOK_ADDRESS" "$TOKEN0" "$TOKEN1" 60 1000000000 500 3000 0 "Keep swaps small and raise fees when volatility spikes."
 ```
 

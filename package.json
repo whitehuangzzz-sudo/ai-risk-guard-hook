@@ -15,6 +15,7 @@
     "wallet:check": "node scripts/wallet-check.mjs",
     "submission:summary": "node scripts/submission-summary.mjs",
     "mine:hook": "node scripts/mine-hook-address.mjs",
+    "pool:init": "node scripts/encode-pool-init-calldata.mjs",
     "policy:calldata": "node scripts/encode-policy-calldata.mjs",
     "app:dev": "npm --prefix app run dev",
     "app:build": "npm --prefix app run build"
