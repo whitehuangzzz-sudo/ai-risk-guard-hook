@@ -16,7 +16,7 @@ AI Risk Guard Hook is an OKX Hook the Future hackathon project for X Layer. It t
 | Tests | `9 passed, 0 failed` with real Uniswap v4 imports |
 | Demo app | Implemented in `app/` |
 | Submission docs | `SUBMISSION.md`, `docs/okx-form.md`, `docs/operator-checklist.md`, `docs/demo-video-script.md` |
-| Live deployment | Requires funded X Layer wallet and final Pool/Hook addresses |
+| Live deployment | Deployed and verified on X Layer mainnet |
 
 ## Quick Start
 
@@ -86,6 +86,21 @@ The project is intended for X Layer deployment. Uniswap's official v4 deployment
 - Testnet RPC: `https://testrpc.xlayer.tech/terigon`
 
 For deployment details, see `docs/deployment.md`. The repo includes a `HookDeployer` CREATE2 factory and a salt miner so the Hook address has the `BEFORE_SWAP` permission bit required by Uniswap v4.
+
+## Live X Layer Evidence
+
+| Item | Value |
+| --- | --- |
+| PoolManager | `0x360e68faccca8ca495c1b759fd9eee466db9fb32` |
+| HookDeployer | `0xea4f7588b9db4e351ccab2be51dabc84d95332fd` |
+| HookDeployer tx | `0x8e0f48ef553671a1cc5d8655131a80bd3d9de575596b8c9145a50c45a61f04a3` |
+| AI Risk Guard Hook | `0x85Ec46D496523aAd8BbDB6E5c4A8c36d6621C080` |
+| Hook deployment tx | `0x803ca69daee3bfea564247f88566268c4474ee29fd3b7a46446d7ba33b59fc39` |
+| Token0 | `0x5166819f807e0F9936855f68dfDDFfb3acaF7c00` |
+| Token1 | `0xDa6004321845A8eF2130286063031B4b5DaBBA92` |
+| PoolId | `0x20782b73d3694279664b30e7fed2de6eb0d2d865fc523bd18f3c9f5a487caa83` |
+| Pool initialization tx | `0x804fad616c475c54b2e5b580cae06fbc722c43fe27d0b7a6ec618ef4373e07f7` |
+| Policy configuration tx | `0x3aeec5491e3fd381955c2143b49610ef5198d5aa9ea70939bbd7263899709e2d` |
 
 ## Commands
 
@@ -205,4 +220,4 @@ For GitHub publishing, follow `docs/github-publish.md`.
 - Demo app implemented.
 - Deployment runbook, CREATE2 factory, and Hook salt miner implemented.
 - Demo ERC20 deployment path implemented for self-contained pool creation.
-- Live deployment still requires a funded X Layer deployer wallet and contract verification.
+- Live X Layer deployment and OKLink verification completed.

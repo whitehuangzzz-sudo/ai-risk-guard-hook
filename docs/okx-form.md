@@ -1,6 +1,6 @@
 # OKX Form Copy Pack
 
-Use this file when filling the OKX Hook the Future submission form. Replace every `fill_after_*` value after live deployment and publishing.
+Use this file when filling the OKX Hook the Future submission form. Live deployment is complete; replace only the GitHub, demo video, and X announcement placeholders after publishing.
 
 ## Project Name
 
@@ -54,18 +54,18 @@ X announcement: fill_after_x_post
 ```text
 Network: X Layer mainnet, chain id 196
 PoolManager: 0x360e68faccca8ca495c1b759fd9eee466db9fb32
-HookDeployer address: fill_after_deploy
-HookDeployer tx: fill_after_deploy
-AI Risk Guard Hook address: fill_after_deploy
-Hook deployment tx: fill_after_deploy
-Token0: fill_after_token_selection
-Token0 deployment tx: fill_after_token_deploy
-Token1: fill_after_token_selection
-Token1 deployment tx: fill_after_token_deploy
-PoolId: fill_after_pool_initialize
-Pool initialization tx: fill_after_pool_initialize
-Policy configuration tx: fill_after_set_policy
-Contract verification URL: fill_after_verify
+HookDeployer address: 0xea4f7588b9db4e351ccab2be51dabc84d95332fd
+HookDeployer tx: 0x8e0f48ef553671a1cc5d8655131a80bd3d9de575596b8c9145a50c45a61f04a3
+AI Risk Guard Hook address: 0x85Ec46D496523aAd8BbDB6E5c4A8c36d6621C080
+Hook deployment tx: 0x803ca69daee3bfea564247f88566268c4474ee29fd3b7a46446d7ba33b59fc39
+Token0: 0x5166819f807e0F9936855f68dfDDFfb3acaF7c00
+Token0 deployment tx: 0xc284796b921e351d474219a0ad88b898e1436c8ce6d66894f4d66a1b5a307465
+Token1: 0xDa6004321845A8eF2130286063031B4b5DaBBA92
+Token1 deployment tx: 0x34a5394f7ffeb6930cc3b2702e6f14422df33652db9a4aa65318724e69c85acc
+PoolId: 0x20782b73d3694279664b30e7fed2de6eb0d2d865fc523bd18f3c9f5a487caa83
+Pool initialization tx: 0x804fad616c475c54b2e5b580cae06fbc722c43fe27d0b7a6ec618ef4373e07f7
+Policy configuration tx: 0x3aeec5491e3fd381955c2143b49610ef5198d5aa9ea70939bbd7263899709e2d
+Contract verification URL: https://www.oklink.com/xlayer/address/0x85Ec46D496523aAd8BbDB6E5c4A8c36d6621C080
 ```
 
 ## Verification Commands

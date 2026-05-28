@@ -61,6 +61,9 @@ requireUrl("github", options.github);
 requireUrl("verify", options.verify);
 requireUrl("demo", options.demo);
 requireUrl("x", options.x);
+requireHostname("github", options.github, ["github.com"]);
+requireHostname("x", options.x, ["x.com", "twitter.com"]);
+requireUrlContains("verify", options.verify, deployment.hookAddress);
 
 if (issues.length > 0) {
   console.error("Submission readiness check failed:");
@@ -140,6 +143,26 @@ function requireUrl(label, value) {
     if (!["http:", "https:"].includes(parsed.protocol)) issues.push(`${label} URL must start with http or https.`);
   } catch {
     issues.push(`${label} URL is not valid.`);
+  }
+}
+
+function requireHostname(label, value, allowedHosts) {
+  if (!value || hasPlaceholder(value)) return;
+
+  try {
+    const parsed = new URL(value);
+    if (!allowedHosts.includes(parsed.hostname.toLowerCase())) {
+      issues.push(`${label} URL must use ${allowedHosts.join(" or ")}.`);
+    }
+  } catch {
+    // requireUrl already reports invalid URLs.
+  }
+}
+
+function requireUrlContains(label, value, expected) {
+  if (!value || !expected || hasPlaceholder(value)) return;
+  if (!value.toLowerCase().includes(expected.toLowerCase())) {
+    issues.push(`${label} URL must include the Hook address ${expected}.`);
   }
 }
 
