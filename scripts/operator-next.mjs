@@ -5,6 +5,7 @@ const files = {
   hook: "deployments/xlayer-mainnet-latest.json",
   tokens: "deployments/xlayer-demo-tokens-latest.json",
   pool: "deployments/xlayer-demo-pool-latest.json",
+  verificationCommands: "deployments/verification-commands.md",
   summary: "deployments/submission-summary.md",
   explorerLinks: "deployments/explorer-links.md",
   publicSubmission: "PUBLIC_SUBMISSION.md",
@@ -19,6 +20,12 @@ const pool = readJson(files.pool);
 const evidence = {
   env: existsSync(files.env),
   hookDeployment: hasLiveHookDeployment(deployment),
+  verificationCommands: hasFreshMarkdown(files.verificationCommands, [
+    deployment?.hookDeployerAddress,
+    deployment?.hookAddress,
+    deployment?.poolManager,
+    deployment?.owner,
+  ]),
   demoTokens: hasLiveTokenDeployment(tokens),
   demoPool: hasLivePoolDeployment(pool, deployment, tokens),
   submissionSummary: hasFreshMarkdown(files.summary, [deployment?.hookAddress, deployment?.hookDeployTx, pool?.poolId, pool?.policyTx]),
@@ -83,6 +90,16 @@ function resolveNextStep(currentEvidence, hasSocialInputs, hasFinalLinks) {
     return {
       step: "hook",
       commands: ["npm run wallet:check", "npm run deploy:xlayer"],
+    };
+  }
+
+  if (!currentEvidence.verificationCommands) {
+    return {
+      step: "verification",
+      commands: [
+        "npm run submission:verify-commands",
+        "Run the printed forge verify-contract commands after the deployment is indexed, then save the Hook OKLink URL as CONTRACT_VERIFICATION_URL.",
+      ],
     };
   }
 

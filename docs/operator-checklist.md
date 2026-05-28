@@ -39,7 +39,7 @@ At any point, run:
 npm run operator:next
 ```
 
-It prints the next command based on local evidence files under `deployments/`.
+It prints the next command based on local evidence files under `deployments/`, including whether OKLink verification commands have been generated.
 
 ## 3. Deploy HookDeployer
 
