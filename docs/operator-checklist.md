@@ -33,6 +33,14 @@ Expected:
 - `Local verification passed.`
 - `wallet:check` reports chain id `196`, matching owner/private key, and non-zero gas balance.
 
+At any point, run:
+
+```bash
+npm run operator:next
+```
+
+It prints the next command based on local evidence files under `deployments/`.
+
 ## 3. Deploy HookDeployer
 
 Fast path:

@@ -68,6 +68,7 @@ AI Risk Guard Hook wraps Hook policy authoring in a retail-friendly flow:
 ```bash
 forge test
 npm run verify
+npm run operator:next
 npm run app:build
 npm run deploy:demo-tokens -- --dry-run --skip-build
 npm run mine:hook -- 0x1111111111111111111111111111111111111111 0x360e68faccca8ca495c1b759fd9eee466db9fb32 0x2222222222222222222222222222222222222222

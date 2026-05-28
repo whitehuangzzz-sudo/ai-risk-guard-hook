@@ -108,6 +108,12 @@ Run the full local verification suite:
 npm run verify
 ```
 
+Show the next live-operator command:
+
+```bash
+npm run operator:next
+```
+
 Run the demo app:
 
 ```bash

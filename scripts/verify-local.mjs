@@ -58,6 +58,7 @@ writeFileSync(
 const commands = [
   ["forge", ["test"]],
   ["npm", ["run", "app:build"]],
+  ["npm", ["run", "operator:next"]],
   ["npm", ["run", "deploy:demo-tokens", "--", "--dry-run", "--skip-build"]],
   ["npm", ["run", "pool:configure", "--", "--dry-run"]],
   [

@@ -11,6 +11,7 @@
     "test": "forge test",
     "build": "forge build",
     "verify": "node scripts/verify-local.mjs",
+    "operator:next": "node scripts/operator-next.mjs",
     "deploy:xlayer": "node scripts/deploy-xlayer.mjs",
     "deploy:demo-tokens": "node scripts/deploy-demo-tokens.mjs",
     "pool:configure": "node scripts/configure-demo-pool.mjs",
