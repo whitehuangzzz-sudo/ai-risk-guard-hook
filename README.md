@@ -160,6 +160,7 @@ npm run submission:summary
 npm run submission:finalize -- --github "$GITHUB_URL" --pool-id "$POOL_ID" --pool-init-tx "$POOL_INIT_TX" --policy-tx "$POLICY_TX" --verify "$VERIFY_URL" --demo "$DEMO_URL" --x "$X_URL"
 npm run submission:links
 npm run submission:public -- --github "$GITHUB_URL" --verify "$VERIFY_URL" --demo "$DEMO_URL" --x "$X_URL"
+npm run submission:social -- --github "$GITHUB_URL" --demo "$DEMO_URL" --public "$PUBLIC_SUBMISSION_URL"
 ```
 
 ## Submission Flow

@@ -102,6 +102,7 @@ Built on X Layer with Uniswap v4 Hooks.
 - `.env` and `deployments/` are not committed.
 - Hook and Pool evidence are filled above.
 - `npm run submission:links` generated `deployments/explorer-links.md`.
+- `npm run submission:social` generated `deployments/social-posts.md`.
 - `npm run submission:check` returns `"status": "ready"`.
 - Demo video is viewable without permission problems.
 - X post includes `@XLayerOfficial`, `@Uniswap`, and `@flapdotsh`.
