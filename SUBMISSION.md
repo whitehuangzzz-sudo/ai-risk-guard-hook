@@ -50,6 +50,7 @@ AI Risk Guard Hook wraps Hook policy authoring in a retail-friendly flow:
 - Hook address miner: `scripts/mine-hook-address.mjs`
 - Policy calldata encoder: `scripts/encode-policy-calldata.mjs`
 - Local deployment automation: `scripts/deploy-xlayer.mjs`
+- Submission summary generator: `scripts/submission-summary.mjs`
 - Tests: `test/AIRiskGuardHook.t.sol`
 - Demo app: `app/src/App.tsx`
 - Deployment runbook: `docs/deployment.md`

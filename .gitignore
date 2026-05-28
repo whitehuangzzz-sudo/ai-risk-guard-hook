@@ -7,4 +7,5 @@ coverage/
 dist/
 app/dist/
 .env
+deployments/
 .DS_Store

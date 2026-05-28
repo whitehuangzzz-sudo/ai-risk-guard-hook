@@ -27,6 +27,8 @@ Fill:
 - `OWNER_ADDRESS`: policy owner/operator address.
 - `XLAYER_MAINNET_RPC_URL`: X Layer mainnet RPC endpoint.
 
+The deployment script reads `.env` automatically. Shell environment variables override `.env` values.
+
 ## Step 1: Deploy HookDeployer
 
 Fast path:
@@ -36,6 +38,12 @@ npm run deploy:xlayer
 ```
 
 This deploys `HookDeployer`, mines a valid Hook address, deploys `AIRiskGuardHook`, and writes deployment evidence to `deployments/xlayer-mainnet-latest.json`.
+
+Create a submission summary from the deployment output:
+
+```bash
+npm run submission:summary
+```
 
 Manual path:
 

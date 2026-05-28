@@ -90,6 +90,12 @@ Deploy the Hook stack from a local wallet environment:
 npm run deploy:xlayer
 ```
 
+Generate a copy-ready submission summary after deployment:
+
+```bash
+npm run submission:summary
+```
+
 ## Demo Script
 
 See `docs/demo-video-script.md` for a 90-120 second recording script.

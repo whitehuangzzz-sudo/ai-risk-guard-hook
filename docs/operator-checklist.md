@@ -19,13 +19,7 @@ Fill:
 - `XLAYER_MAINNET_RPC_URL`
 - `XLAYER_MAINNET_POOL_MANAGER=0x360e68faccca8ca495c1b759fd9eee466db9fb32`
 
-Load the env:
-
-```bash
-set -a
-source .env
-set +a
-```
+`npm run deploy:xlayer` reads `.env` automatically. Shell environment variables still override `.env` values.
 
 ## 2. Verify Locally
 
@@ -44,6 +38,12 @@ npm run deploy:xlayer
 ```
 
 This deploys `HookDeployer`, mines a valid `BEFORE_SWAP` Hook address, deploys `AIRiskGuardHook`, and writes non-secret output to `deployments/xlayer-mainnet-latest.json`.
+
+Then generate the copy-ready submission summary:
+
+```bash
+npm run submission:summary
+```
 
 Manual path:
 
