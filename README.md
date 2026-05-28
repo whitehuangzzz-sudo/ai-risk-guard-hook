@@ -1,8 +1,40 @@
 # AI Risk Guard Hook
 
-AI Risk Guard Hook is an OKX Hook the Future hackathon project for X Layer. It turns a plain-language risk preference into a Uniswap v4 `beforeSwap` Hook policy that can reject unsafe swaps or return a dynamic LP fee override.
+AI Risk Guard Hook is an OKX Hook the Future hackathon project for X Layer. It turns a plain-language risk preference into a Uniswap v4 `beforeSwap` Hook policy that can reject unsafe swaps, return dynamic LP fee overrides, and trigger circuit-breaker mode.
+
+**AI writes the policy. Solidity enforces it.**
 
 ![AI Risk Guard Hook demo](docs/assets/demo-screenshot.png)
+
+## Status
+
+| Area | Status |
+| --- | --- |
+| Hook contract | Implemented in `src/AIRiskGuardHook.sol` |
+| CREATE2 deployment | Implemented in `src/HookDeployer.sol` and `scripts/deploy-xlayer.mjs` |
+| Tests | `9 passed, 0 failed` with real Uniswap v4 imports |
+| Demo app | Implemented in `app/` |
+| Submission docs | `SUBMISSION.md`, `docs/operator-checklist.md`, `docs/demo-video-script.md` |
+| Live deployment | Requires funded X Layer wallet and final Pool/Hook addresses |
+
+## Quick Start
+
+```bash
+npm install
+npm --prefix app install
+npm run verify
+npm run app:dev
+```
+
+## Table of Contents
+
+- [Why It Exists](#why-it-exists)
+- [How It Works](#how-it-works)
+- [Hook Behavior](#hook-behavior)
+- [X Layer Target](#x-layer-target)
+- [Commands](#commands)
+- [Submission Flow](#submission-flow)
+- [Current Status](#current-status)
 
 ## Why It Exists
 
@@ -15,6 +47,21 @@ Most retail users cannot reason about Uniswap v4 Hooks, dynamic fees, volatility
 5. The Hook allows, rejects, or raises fees based on the policy.
 
 AI proposes the policy. Solidity enforces it.
+
+## How It Works
+
+```mermaid
+flowchart LR
+    User["Retail user prompt"] --> App["AI Policy Compiler UI"]
+    App --> Policy["Bounded policy params"]
+    Policy --> Hook["AIRiskGuardHook beforeSwap"]
+    Hook --> Allow["Allow swap + normal fee"]
+    Hook --> Elevated["Allow swap + elevated fee"]
+    Hook --> Block["Revert swap"]
+    Hook --> Deploy["X Layer Uniswap v4 dynamic-fee pool"]
+```
+
+The AI layer is a policy authoring assistant. It does not have privileged on-chain authority. The Hook stores explicit policy parameters and enforces them deterministically inside `beforeSwap`.
 
 ## Hook Behavior
 
@@ -96,6 +143,17 @@ Generate a copy-ready submission summary after deployment:
 ```bash
 npm run submission:summary
 ```
+
+## Submission Flow
+
+1. Publish the repo with `docs/github-publish.md`.
+2. Fill `.env` locally; never commit it.
+3. Run `npm run wallet:check`.
+4. Run `npm run deploy:xlayer`.
+5. Create or initialize the dynamic-fee v4 pool with the deployed Hook.
+6. Run `npm run policy:calldata` for the real PoolKey, then submit the `setPolicy` transaction.
+7. Record the demo using `docs/demo-video-script.md`.
+8. Fill `SUBMISSION.md`, publish the X post, and submit the OKX form.
 
 ## Demo Script
 
