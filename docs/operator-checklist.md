@@ -229,6 +229,14 @@ npm run submission:finalize -- \
 
 Both forms write `deployments/submission-summary.md`.
 
+Generate explorer links for README, video description, and the OKX form:
+
+```bash
+npm run submission:links
+```
+
+This writes `deployments/explorer-links.md`.
+
 Run the final pre-submit checker:
 
 ```bash

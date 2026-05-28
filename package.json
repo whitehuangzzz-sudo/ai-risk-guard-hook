@@ -19,6 +19,7 @@
     "submission:summary": "node scripts/submission-summary.mjs",
     "submission:finalize": "node scripts/submission-summary.mjs",
     "submission:check": "node scripts/check-submission-ready.mjs",
+    "submission:links": "node scripts/generate-explorer-links.mjs",
     "mine:hook": "node scripts/mine-hook-address.mjs",
     "pool:init": "node scripts/encode-pool-init-calldata.mjs",
     "policy:calldata": "node scripts/encode-policy-calldata.mjs",

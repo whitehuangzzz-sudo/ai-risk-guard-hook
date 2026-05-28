@@ -88,6 +88,20 @@ const commands = [
     "npm",
     [
       "run",
+      "submission:links",
+      "--",
+      "--deployment",
+      "deployments/mock/deployment.json",
+      "--tokens",
+      "deployments/mock/tokens.json",
+      "--pool",
+      "deployments/mock/pool.json",
+    ],
+  ],
+  [
+    "npm",
+    [
+      "run",
       "mine:hook",
       "--",
       "0x1111111111111111111111111111111111111111",

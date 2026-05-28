@@ -74,6 +74,7 @@ npm run deploy:demo-tokens -- --dry-run --skip-build
 npm run mine:hook -- 0x1111111111111111111111111111111111111111 0x360e68faccca8ca495c1b759fd9eee466db9fb32 0x2222222222222222222222222222222222222222
 npm run pool:init -- 0x360e68faccca8ca495c1b759fd9eee466db9fb32 0xabdE3870CD4a1CE8Bb761963b2080e21AC9d8080 0x0000000000000000000000000000000000001000 0x0000000000000000000000000000000000002000 60
 npm run policy:calldata -- 0xabdE3870CD4a1CE8Bb761963b2080e21AC9d8080 0x0000000000000000000000000000000000001000 0x0000000000000000000000000000000000002000 60 1000000000 500 3000 0 "Keep swaps small and raise fees when volatility spikes."
+npm run submission:links -- --deployment deployments/mock/deployment.json --tokens deployments/mock/tokens.json --pool deployments/mock/pool.json
 npm run submission:check -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"
 npm audit --audit-level=moderate
 ```
