@@ -237,6 +237,18 @@ npm run submission:links
 
 This writes `deployments/explorer-links.md`.
 
+Generate a public evidence page that can be committed to GitHub:
+
+```bash
+npm run submission:public -- \
+  --github "https://github.com/<your-user>/ai-risk-guard-hook" \
+  --verify "$CONTRACT_VERIFICATION_URL" \
+  --demo "$DEMO_VIDEO_URL" \
+  --x "$X_ANNOUNCEMENT_URL"
+```
+
+This writes `PUBLIC_SUBMISSION.md`.
+
 Run the final pre-submit checker:
 
 ```bash

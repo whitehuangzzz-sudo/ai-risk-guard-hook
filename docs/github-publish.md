@@ -45,6 +45,18 @@ git push -u origin main
 - Confirm README shows the demo screenshot.
 - Confirm GitHub Actions CI runs successfully.
 - Add the final Hook/Pool addresses to `SUBMISSION.md` and `docs/okx-form.md` after deployment.
+- Generate and commit `PUBLIC_SUBMISSION.md` after live deployment:
+
+```bash
+npm run submission:public -- \
+  --github "https://github.com/<your-user>/ai-risk-guard-hook" \
+  --verify "$CONTRACT_VERIFICATION_URL" \
+  --demo "$DEMO_VIDEO_URL" \
+  --x "$X_ANNOUNCEMENT_URL"
+git add PUBLIC_SUBMISSION.md
+git commit -m "docs: add public deployment evidence"
+git push
+```
 
 ## Links To Submit
 
