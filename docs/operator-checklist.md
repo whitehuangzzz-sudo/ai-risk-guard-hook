@@ -214,7 +214,7 @@ npm run submission:social -- \
   --public "https://github.com/<your-user>/ai-risk-guard-hook/blob/main/PUBLIC_SUBMISSION.md"
 ```
 
-This writes `deployments/social-posts.md`. Publish the X post and save the resulting `X_ANNOUNCEMENT_URL`.
+This writes `deployments/social-posts.md`, including the project announcement, video description, OKX short description, and the `@OKXWallet_CN` Markdown-copy feedback post. Publish the project X post and save the resulting `X_ANNOUNCEMENT_URL`.
 
 Regenerate the final copy-ready submission summary with public links and on-chain evidence:
 

@@ -96,6 +96,16 @@ Built on X Layer with Uniswap v4 Hooks.
 @Uniswap @flapdotsh
 ```
 
+## Suggested OKX Wallet Feedback
+
+```text
+@OKXWallet_CN 给活动页提一个小建议：能不能加一个“一键复制 Markdown”按钮？
+
+把活动规则、提交要求、截止时间、官方链接和标签要求整理成 Markdown，普通参赛者就可以直接粘给 Claude Code / Codex / ChatGPT 做头脑风暴、拆需求、生成提交清单。
+
+现在黑客松越来越像“想法 + AI 执行力”的比赛，活动信息越适合 AI 读取，普通人越容易参赛。
+```
+
 ## Final Pre-Submit Check
 
 - GitHub repo is public.
