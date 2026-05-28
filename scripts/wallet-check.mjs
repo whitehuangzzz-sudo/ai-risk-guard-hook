@@ -35,12 +35,12 @@ try {
         poolManager,
         balanceWei: balance.toString(),
         balanceNative: formatEther(balance),
-        ready: chainId === 196 && ownerMatchesPrivateKey && balance > 0n,
+        ready: chainId === 196 && balance > 0n,
         notes: [
           chainId === 196 ? "RPC is on X Layer mainnet." : "RPC chain id is not X Layer mainnet.",
           ownerMatchesPrivateKey
             ? "OWNER_ADDRESS matches PRIVATE_KEY."
-            : "OWNER_ADDRESS does not match PRIVATE_KEY. This is allowed only if owner should be a different policy admin.",
+            : "OWNER_ADDRESS differs from PRIVATE_KEY. Deployment can still proceed if owner should be a different policy admin.",
           balance > 0n ? "Wallet has native gas balance." : "Wallet has no native gas balance.",
         ],
       },

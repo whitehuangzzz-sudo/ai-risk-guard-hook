@@ -31,7 +31,8 @@ npm run wallet:check
 Expected:
 
 - `Local verification passed.`
-- `wallet:check` reports chain id `196`, matching owner/private key, and non-zero gas balance.
+- `wallet:check` reports chain id `196` and non-zero gas balance.
+- If `OWNER_ADDRESS` differs from the deployer private key, confirm that you intentionally want a separate policy admin.
 
 At any point, run:
 
