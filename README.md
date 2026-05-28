@@ -2,6 +2,8 @@
 
 AI Risk Guard Hook is an OKX Hook the Future hackathon project for X Layer. It turns a plain-language risk preference into a Uniswap v4 `beforeSwap` Hook policy that can reject unsafe swaps or return a dynamic LP fee override.
 
+![AI Risk Guard Hook demo](docs/assets/demo-screenshot.png)
+
 ## Why It Exists
 
 Most retail users cannot reason about Uniswap v4 Hooks, dynamic fees, volatility, and circuit breakers. This project makes the Hook feel like a product:
@@ -52,6 +54,12 @@ Run Solidity tests:
 forge test
 ```
 
+Run the full local verification suite:
+
+```bash
+npm run verify
+```
+
 Run the demo app:
 
 ```bash
@@ -89,6 +97,8 @@ See `docs/demo-video-script.md` for a 90-120 second recording script.
 - Announce the project from a dedicated X account and tag `@XLayerOfficial`, `@Uniswap`, and `@flapdotsh`.
 
 See `SUBMISSION.md` for the final submission pack, suggested X post, and address table.
+
+If the deployer wallet is ready, follow `docs/operator-checklist.md`.
 
 ## Current Status
 

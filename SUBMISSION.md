@@ -52,11 +52,14 @@ AI Risk Guard Hook wraps Hook policy authoring in a retail-friendly flow:
 - Tests: `test/AIRiskGuardHook.t.sol`
 - Demo app: `app/src/App.tsx`
 - Deployment runbook: `docs/deployment.md`
+- Operator checklist: `docs/operator-checklist.md`
+- Demo screenshot: `docs/assets/demo-screenshot.png`
 
 ## Verification Commands
 
 ```bash
 forge test
+npm run verify
 npm run app:build
 npm run mine:hook -- 0x1111111111111111111111111111111111111111 0x360e68faccca8ca495c1b759fd9eee466db9fb32 0x2222222222222222222222222222222222222222
 npm run policy:calldata -- 0xabdE3870CD4a1CE8Bb761963b2080e21AC9d8080 0x0000000000000000000000000000000000001000 0x0000000000000000000000000000000000002000 60 1000000000 500 3000 0 "Keep swaps small and raise fees when volatility spikes."
@@ -66,6 +69,7 @@ npm audit --audit-level=moderate
 Expected current result:
 
 - `forge test`: 9 passed, 0 failed.
+- `npm run verify`: runs contract tests, app build, Hook mining, policy calldata, and npm audit.
 - `npm run app:build`: Vite production build succeeds.
 - `npm run mine:hook`: returns a `BEFORE_SWAP` Hook address, salt, and deploy calldata.
 - `npm run policy:calldata`: returns PoolId, policy hash, and `setPolicy` calldata.
