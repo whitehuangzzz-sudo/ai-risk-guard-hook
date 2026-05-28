@@ -9,58 +9,14 @@ const files = {
 };
 const args = parseArgs(process.argv.slice(2));
 const linksProvided = Boolean(args.github && args.verify && args.demo && args.x);
-const steps = [
-  {
-    id: "env",
-    ready: existsSync(files.env),
-    next: [
-      "cp .env.example .env",
-      "Fill PRIVATE_KEY, OWNER_ADDRESS, XLAYER_MAINNET_RPC_URL, and XLAYER_MAINNET_POOL_MANAGER in .env.",
-    ],
-  },
-  {
-    id: "wallet",
-    ready: false,
-    next: ["npm run wallet:check"],
-    alwaysShowUntil: "hook",
-  },
-  {
-    id: "tokens",
-    ready: existsSync(files.tokens),
-    next: ["npm run deploy:demo-tokens"],
-  },
-  {
-    id: "hook",
-    ready: existsSync(files.hook),
-    next: ["npm run deploy:xlayer"],
-  },
-  {
-    id: "pool",
-    ready: existsSync(files.pool),
-    next: ["npm run pool:configure"],
-  },
-  {
-    id: "summary",
-    ready: existsSync(files.summary) && linksProvided,
-    next: [
-      'npm run submission:finalize -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
-    ],
-  },
-  {
-    id: "check",
-    ready: false,
-    next: [
-      'npm run submission:check -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
-    ],
-    final: true,
-  },
-];
-
-const nextStep = steps.find((step) => {
-  if (step.id === "wallet") return existsSync(files.env) && !existsSync(files.hook);
-  if (step.final) return existsSync(files.pool);
-  return !step.ready;
-});
+const evidence = {
+  env: existsSync(files.env),
+  hookDeployment: existsSync(files.hook),
+  demoTokens: existsSync(files.tokens),
+  demoPool: existsSync(files.pool),
+  submissionSummary: existsSync(files.summary),
+};
+const nextStep = resolveNextStep(evidence, linksProvided);
 
 if (!nextStep) {
   print({
@@ -70,22 +26,66 @@ if (!nextStep) {
       "Publish the X announcement.",
       "Submit the OKX form using deployments/submission-summary.md.",
     ],
+    evidence,
   });
   process.exit(0);
 }
 
 print({
   status: "next-step",
-  step: nextStep.id,
-  commands: nextStep.next,
-  evidence: {
-    env: existsSync(files.env),
-    hookDeployment: existsSync(files.hook),
-    demoTokens: existsSync(files.tokens),
-    demoPool: existsSync(files.pool),
-    submissionSummary: existsSync(files.summary),
-  },
+  step: nextStep.step,
+  commands: nextStep.commands,
+  evidence,
 });
+
+function resolveNextStep(currentEvidence, hasLinks) {
+  if (!currentEvidence.env) {
+    return {
+      step: "env",
+      commands: [
+        "cp .env.example .env",
+        "Fill PRIVATE_KEY, OWNER_ADDRESS, XLAYER_MAINNET_RPC_URL, and XLAYER_MAINNET_POOL_MANAGER in .env.",
+      ],
+    };
+  }
+
+  if (!currentEvidence.demoTokens) {
+    return {
+      step: "tokens",
+      commands: ["npm run wallet:check", "npm run deploy:demo-tokens"],
+    };
+  }
+
+  if (!currentEvidence.hookDeployment) {
+    return {
+      step: "hook",
+      commands: ["npm run wallet:check", "npm run deploy:xlayer"],
+    };
+  }
+
+  if (!currentEvidence.demoPool) {
+    return {
+      step: "pool",
+      commands: ["npm run pool:configure"],
+    };
+  }
+
+  if (!currentEvidence.submissionSummary || !hasLinks) {
+    return {
+      step: "summary",
+      commands: [
+        'npm run submission:finalize -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
+      ],
+    };
+  }
+
+  return {
+    step: "check",
+    commands: [
+      'npm run submission:check -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
+    ],
+  };
+}
 
 function parseArgs(rawArgs) {
   const parsed = {};
