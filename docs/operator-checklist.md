@@ -154,6 +154,21 @@ Save:
 
 - Policy configuration transaction hash
 
+Regenerate the final copy-ready submission summary with public links and on-chain evidence:
+
+```bash
+npm run submission:finalize -- \
+  --github "https://github.com/<your-user>/ai-risk-guard-hook" \
+  --pool-id "$POOL_ID" \
+  --pool-init-tx "$POOL_INIT_TX" \
+  --policy-tx "$POLICY_TX" \
+  --verify "$CONTRACT_VERIFICATION_URL" \
+  --demo "$DEMO_VIDEO_URL" \
+  --x "$X_ANNOUNCEMENT_URL"
+```
+
+This writes `deployments/submission-summary.md`.
+
 ## 8. Record Demo
 
 Use `docs/demo-video-script.md`.

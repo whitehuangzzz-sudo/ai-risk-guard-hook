@@ -52,7 +52,7 @@ AI Risk Guard Hook wraps Hook policy authoring in a retail-friendly flow:
 - Pool initialization calldata encoder: `scripts/encode-pool-init-calldata.mjs`
 - Local deployment automation: `scripts/deploy-xlayer.mjs`
 - Wallet/RPC preflight: `scripts/wallet-check.mjs`
-- Submission summary generator: `scripts/submission-summary.mjs`
+- Submission summary/final form generator: `scripts/submission-summary.mjs`
 - Tests: `test/AIRiskGuardHook.t.sol`
 - Demo app: `app/src/App.tsx`
 - Deployment runbook: `docs/deployment.md`
