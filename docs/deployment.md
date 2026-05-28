@@ -103,6 +103,14 @@ Check the transaction logs for `HookDeployed`.
 
 ## Step 4: Create a Dynamic-Fee v4 Pool
 
+If you do not already have two ERC20 tokens for the demo pair, deploy the included demo tokens first:
+
+```bash
+npm run deploy:demo-tokens
+```
+
+Use the sorted `token0` and `token1` values from `deployments/xlayer-demo-tokens-latest.json`.
+
 Generate PoolManager `initialize` calldata for a dynamic-fee pool:
 
 ```bash

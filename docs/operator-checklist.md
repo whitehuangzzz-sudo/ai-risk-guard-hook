@@ -50,6 +50,23 @@ Then generate the copy-ready submission summary:
 npm run submission:summary
 ```
 
+## 3A. Deploy Demo Tokens If Needed
+
+If you do not already have two ERC20 tokens for the demo pool, deploy the included demo pair:
+
+```bash
+npm run deploy:demo-tokens
+```
+
+This writes `deployments/xlayer-demo-tokens-latest.json`.
+
+Set `TOKEN0` and `TOKEN1` from the sorted output:
+
+```bash
+export TOKEN0=replace_with_token0
+export TOKEN1=replace_with_token1
+```
+
 Manual path:
 
 ```bash

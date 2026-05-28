@@ -42,7 +42,7 @@ contract AIRiskGuardHookTest {
         });
     }
 
-    function testHookPermissionsEnableBeforeSwapOnly() public {
+    function testHookPermissionsEnableBeforeSwapOnly() public view {
         Hooks.Permissions memory permissions = hook.getHookPermissions();
 
         assertTrue(permissions.beforeSwap);
@@ -147,10 +147,12 @@ contract AIRiskGuardHookTest {
     }
 
     function _exactInputSwap(uint256 amount) internal pure returns (SwapParams memory) {
+        // forge-lint: disable-next-line(unsafe-typecast)
         return SwapParams({zeroForOne: true, amountSpecified: -int256(amount), sqrtPriceLimitX96: 0});
     }
 
     function _exactOutputSwap(uint256 amount) internal pure returns (SwapParams memory) {
+        // forge-lint: disable-next-line(unsafe-typecast)
         return SwapParams({zeroForOne: true, amountSpecified: int256(amount), sqrtPriceLimitX96: 0});
     }
 

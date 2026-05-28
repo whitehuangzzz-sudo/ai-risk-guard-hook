@@ -11,6 +11,7 @@ AI Risk Guard Hook is an OKX Hook the Future hackathon project for X Layer. It t
 | Area | Status |
 | --- | --- |
 | Hook contract | Implemented in `src/AIRiskGuardHook.sol` |
+| Demo ERC20 pair | Implemented in `src/DemoERC20.sol` and `scripts/deploy-demo-tokens.mjs` |
 | CREATE2 deployment | Implemented in `src/HookDeployer.sol` and `scripts/deploy-xlayer.mjs` |
 | Tests | `9 passed, 0 failed` with real Uniswap v4 imports |
 | Demo app | Implemented in `app/` |
@@ -136,6 +137,7 @@ Deploy the Hook stack from a local wallet environment:
 
 ```bash
 npm run wallet:check
+npm run deploy:demo-tokens
 npm run deploy:xlayer
 ```
 
@@ -151,11 +153,12 @@ npm run submission:finalize -- --github "$GITHUB_URL" --pool-id "$POOL_ID" --poo
 1. Publish the repo with `docs/github-publish.md`.
 2. Fill `.env` locally; never commit it.
 3. Run `npm run wallet:check`.
-4. Run `npm run deploy:xlayer`.
-5. Create or initialize the dynamic-fee v4 pool with the deployed Hook.
-6. Run `npm run policy:calldata` for the real PoolKey, then submit the `setPolicy` transaction.
-7. Record the demo using `docs/demo-video-script.md`.
-8. Fill `SUBMISSION.md` and `docs/okx-form.md`, publish the X post, and submit the OKX form.
+4. Run `npm run deploy:demo-tokens` if you do not already have a token pair for the demo pool.
+5. Run `npm run deploy:xlayer`.
+6. Create or initialize the dynamic-fee v4 pool with the deployed Hook.
+7. Run `npm run policy:calldata` for the real PoolKey, then submit the `setPolicy` transaction.
+8. Record the demo using `docs/demo-video-script.md`.
+9. Fill `SUBMISSION.md` and `docs/okx-form.md`, publish the X post, and submit the OKX form.
 
 ## Demo Script
 
@@ -183,4 +186,5 @@ For GitHub publishing, follow `docs/github-publish.md`.
 - Foundry tests cover the policy engine.
 - Demo app implemented.
 - Deployment runbook, CREATE2 factory, and Hook salt miner implemented.
+- Demo ERC20 deployment path implemented for self-contained pool creation.
 - Live deployment still requires a funded X Layer deployer wallet and contract verification.

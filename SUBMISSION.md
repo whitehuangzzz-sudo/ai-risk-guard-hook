@@ -46,7 +46,9 @@ AI Risk Guard Hook wraps Hook policy authoring in a retail-friendly flow:
 ## Repository Evidence
 
 - Hook contract: `src/AIRiskGuardHook.sol`
+- Demo token contract: `src/DemoERC20.sol`
 - CREATE2 factory: `src/HookDeployer.sol`
+- Demo token deployer: `scripts/deploy-demo-tokens.mjs`
 - Hook address miner: `scripts/mine-hook-address.mjs`
 - Policy calldata encoder: `scripts/encode-policy-calldata.mjs`
 - Pool initialization calldata encoder: `scripts/encode-pool-init-calldata.mjs`
@@ -67,6 +69,7 @@ AI Risk Guard Hook wraps Hook policy authoring in a retail-friendly flow:
 forge test
 npm run verify
 npm run app:build
+npm run deploy:demo-tokens -- --dry-run --skip-build
 npm run mine:hook -- 0x1111111111111111111111111111111111111111 0x360e68faccca8ca495c1b759fd9eee466db9fb32 0x2222222222222222222222222222222222222222
 npm run pool:init -- 0x360e68faccca8ca495c1b759fd9eee466db9fb32 0xabdE3870CD4a1CE8Bb761963b2080e21AC9d8080 0x0000000000000000000000000000000000001000 0x0000000000000000000000000000000000002000 60
 npm run policy:calldata -- 0xabdE3870CD4a1CE8Bb761963b2080e21AC9d8080 0x0000000000000000000000000000000000001000 0x0000000000000000000000000000000000002000 60 1000000000 500 3000 0 "Keep swaps small and raise fees when volatility spikes."
