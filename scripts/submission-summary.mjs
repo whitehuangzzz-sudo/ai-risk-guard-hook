@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 const options = parseArgs(process.argv.slice(2));
 const deploymentPath = options.deployment || "deployments/xlayer-mainnet-latest.json";
 const tokenPath = options.tokens || "deployments/xlayer-demo-tokens-latest.json";
+const poolPath = options.pool || "deployments/xlayer-demo-pool-latest.json";
 
 if (!existsSync(deploymentPath)) {
   console.error(`Deployment file not found: ${deploymentPath}`);
@@ -12,6 +13,7 @@ if (!existsSync(deploymentPath)) {
 
 const deployment = JSON.parse(readFileSync(deploymentPath, "utf8"));
 const tokenDeployment = existsSync(tokenPath) ? JSON.parse(readFileSync(tokenPath, "utf8")) : {};
+const poolDeployment = existsSync(poolPath) ? JSON.parse(readFileSync(poolPath, "utf8")) : {};
 const links = {
   github: options.github || "fill_after_github_publish",
   demo: options.demo || "fill_after_video_upload",
@@ -25,9 +27,9 @@ const tokens = {
   token1Tx: options.token1Tx || findTokenTx(tokenDeployment, tokenDeployment.token1) || "fill_after_token_deploy",
 };
 const pool = {
-  id: options.poolId || "fill_after_pool_initialize",
-  initTx: options.poolInitTx || "fill_after_pool_initialize",
-  policyTx: options.policyTx || "fill_after_set_policy",
+  id: options.poolId || poolDeployment.poolId || "fill_after_pool_initialize",
+  initTx: options.poolInitTx || poolDeployment.poolInitTx || "fill_after_pool_initialize",
+  policyTx: options.policyTx || poolDeployment.policyTx || "fill_after_set_policy",
 };
 const lines = [
   "# Submission Summary",

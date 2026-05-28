@@ -126,6 +126,12 @@ Mine a v4-valid Hook address after deploying `HookDeployer`:
 npm run mine:hook -- "$HOOK_DEPLOYER_ADDRESS" "$XLAYER_MAINNET_POOL_MANAGER" "$OWNER_ADDRESS"
 ```
 
+Initialize the demo pool and configure its first policy after deploying demo tokens and Hook:
+
+```bash
+npm run pool:configure
+```
+
 Generate `setPolicy` and `setRiskMode` calldata:
 
 ```bash
@@ -155,8 +161,8 @@ npm run submission:finalize -- --github "$GITHUB_URL" --pool-id "$POOL_ID" --poo
 3. Run `npm run wallet:check`.
 4. Run `npm run deploy:demo-tokens` if you do not already have a token pair for the demo pool.
 5. Run `npm run deploy:xlayer`.
-6. Create or initialize the dynamic-fee v4 pool with the deployed Hook.
-7. Run `npm run policy:calldata` for the real PoolKey, then submit the `setPolicy` transaction.
+6. Run `npm run pool:configure` to initialize the dynamic-fee v4 pool and configure the first policy.
+7. Optionally run `npm run pool:init` and `npm run policy:calldata` if you prefer manual calldata submission.
 8. Record the demo using `docs/demo-video-script.md`.
 9. Fill `SUBMISSION.md` and `docs/okx-form.md`, publish the X post, and submit the OKX form.
 

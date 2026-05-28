@@ -4,6 +4,7 @@ const commands = [
   ["forge", ["test"]],
   ["npm", ["run", "app:build"]],
   ["npm", ["run", "deploy:demo-tokens", "--", "--dry-run", "--skip-build"]],
+  ["npm", ["run", "pool:configure", "--", "--dry-run"]],
   [
     "npm",
     [

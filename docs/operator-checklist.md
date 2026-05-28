@@ -132,6 +132,22 @@ Save:
 
 ## 6. Create Dynamic-Fee Pool
 
+Fast path:
+
+```bash
+npm run pool:configure
+```
+
+This reads `deployments/xlayer-mainnet-latest.json` and `deployments/xlayer-demo-tokens-latest.json`, initializes the dynamic-fee pool, sets the first policy, and writes `deployments/xlayer-demo-pool-latest.json`.
+
+Save:
+
+- PoolId
+- pool initialization transaction hash
+- Policy configuration transaction hash
+
+Manual path:
+
 Generate PoolManager `initialize` calldata:
 
 ```bash
@@ -150,7 +166,7 @@ Save:
 - PoolId
 - pool initialization transaction hash
 
-## 7. Generate Policy Calldata
+## 7. Generate Policy Calldata Manually
 
 ```bash
 npm run policy:calldata -- \

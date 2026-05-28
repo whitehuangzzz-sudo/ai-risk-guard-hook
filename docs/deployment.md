@@ -111,6 +111,16 @@ npm run deploy:demo-tokens
 
 Use the sorted `token0` and `token1` values from `deployments/xlayer-demo-tokens-latest.json`.
 
+Fast path:
+
+```bash
+npm run pool:configure
+```
+
+This initializes the dynamic-fee pool, configures the first policy, and writes `deployments/xlayer-demo-pool-latest.json`.
+
+Manual path:
+
 Generate PoolManager `initialize` calldata for a dynamic-fee pool:
 
 ```bash

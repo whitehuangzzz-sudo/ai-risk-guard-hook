@@ -13,6 +13,7 @@
     "verify": "node scripts/verify-local.mjs",
     "deploy:xlayer": "node scripts/deploy-xlayer.mjs",
     "deploy:demo-tokens": "node scripts/deploy-demo-tokens.mjs",
+    "pool:configure": "node scripts/configure-demo-pool.mjs",
     "wallet:check": "node scripts/wallet-check.mjs",
     "submission:summary": "node scripts/submission-summary.mjs",
     "submission:finalize": "node scripts/submission-summary.mjs",
