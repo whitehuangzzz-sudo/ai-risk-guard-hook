@@ -75,7 +75,20 @@
 ### Task 7: Verification
 
 **Commands:**
-- [ ] Run `forge test`.
-- [ ] Run `npm --prefix app install`.
-- [ ] Run `npm --prefix app run build`.
-- [ ] Start the app locally and inspect it in browser.
+- [x] Run `forge test`.
+- [x] Run `npm --prefix app install`.
+- [x] Run `npm --prefix app run build`.
+- [x] Start the app locally and inspect it in browser.
+
+### Task 8: Deployment Readiness
+
+**Files:**
+- Create: `src/HookDeployer.sol`
+- Create: `scripts/mine-hook-address.mjs`
+- Create: `.env.example`
+- Create: `docs/deployment.md`
+
+- [x] Add a CREATE2 factory for deploying `AIRiskGuardHook` at a v4-valid address.
+- [x] Add a salt miner that predicts an address with the `BEFORE_SWAP` permission flag.
+- [x] Add X Layer mainnet PoolManager configuration.
+- [x] Document the deployment and evidence collection flow.

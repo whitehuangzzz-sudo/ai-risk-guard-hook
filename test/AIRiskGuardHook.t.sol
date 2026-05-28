@@ -2,7 +2,9 @@
 pragma solidity ^0.8.26;
 
 import {AIRiskGuardHook} from "../src/AIRiskGuardHook.sol";
+import {HookDeployer} from "../src/HookDeployer.sol";
 import {BaseHook} from "@uniswap/v4-periphery/src/utils/BaseHook.sol";
+import {HookMiner} from "@uniswap/v4-periphery/src/utils/HookMiner.sol";
 import {Hooks} from "@uniswap/v4-core/src/libraries/Hooks.sol";
 import {LPFeeLibrary} from "@uniswap/v4-core/src/libraries/LPFeeLibrary.sol";
 import {IPoolManager} from "@uniswap/v4-core/src/interfaces/IPoolManager.sol";
@@ -126,6 +128,20 @@ contract AIRiskGuardHookTest {
         assertFalse(success);
     }
 
+    function testCreate2DeployerMinesValidBeforeSwapHookAddress() public {
+        HookDeployer deployer = new HookDeployer();
+        uint160 flags = Hooks.BEFORE_SWAP_FLAG;
+        bytes memory constructorArgs = abi.encode(IPoolManager(address(this)), address(this));
+        (address expectedHook, bytes32 salt) =
+            HookMiner.find(address(deployer), flags, type(AIRiskGuardHook).creationCode, constructorArgs);
+
+        AIRiskGuardHook deployed =
+            deployer.deployAIRiskGuardHook(salt, IPoolManager(address(this)), address(this));
+
+        assertEqAddress(address(deployed), expectedHook);
+        assertTrue(uint160(address(deployed)) & Hooks.ALL_HOOK_MASK == flags);
+    }
+
     function _setPolicy(AIRiskGuardHook.RiskMode riskMode) internal {
         hook.setPolicy(key, MAX_SWAP, NORMAL_FEE, ELEVATED_FEE, riskMode, POLICY_HASH);
     }
@@ -164,5 +180,9 @@ contract AIRiskGuardHookTest {
 
     function assertEqBytes32(bytes32 actual, bytes32 expected) internal pure {
         require(actual == expected, "bytes32 mismatch");
+    }
+
+    function assertEqAddress(address actual, address expected) internal pure {
+        require(actual == expected, "address mismatch");
     }
 }

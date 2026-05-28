@@ -28,13 +28,14 @@ The first version intentionally rejects exact-output swaps so the demo risk mode
 
 ## X Layer Target
 
-The project is intended for X Layer testnet deployment.
+The project is intended for X Layer deployment. Uniswap's official v4 deployments list includes X Layer mainnet, chain id `196`.
 
+- X Layer mainnet chain id: `196`
+- X Layer mainnet PoolManager: `0x360e68faccca8ca495c1b759fd9eee466db9fb32`
 - X Layer testnet chain id: `1952`
-- Example RPC: `https://testrpc.xlayer.tech/terigon`
-- Alternative RPC: `https://xlayertestrpc.okx.com/terigon`
+- Testnet RPC: `https://testrpc.xlayer.tech/terigon`
 
-For a production Uniswap v4 deployment, mine the Hook deployment salt so the Hook address has the `BEFORE_SWAP` permission bit required by Uniswap v4.
+For deployment details, see `docs/deployment.md`. The repo includes a `HookDeployer` CREATE2 factory and a salt miner so the Hook address has the `BEFORE_SWAP` permission bit required by Uniswap v4.
 
 ## Commands
 
@@ -63,6 +64,12 @@ Build the demo app:
 npm run app:build
 ```
 
+Mine a v4-valid Hook address after deploying `HookDeployer`:
+
+```bash
+npm run mine:hook -- "$HOOK_DEPLOYER_ADDRESS" "$XLAYER_MAINNET_POOL_MANAGER" "$OWNER_ADDRESS"
+```
+
 ## Demo Script
 
 1. Show the app and type: "Keep swaps small and raise fees when volatility spikes."
@@ -86,4 +93,5 @@ npm run app:build
 - Core Hook contract implemented.
 - Foundry tests cover the policy engine.
 - Demo app implemented.
-- Deployment script is a sketch and still needs the live X Layer PoolManager address plus mined Hook salt.
+- Deployment runbook, CREATE2 factory, and Hook salt miner implemented.
+- Live deployment still requires a funded X Layer deployer wallet and contract verification.

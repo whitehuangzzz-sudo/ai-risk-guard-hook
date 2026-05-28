@@ -2,16 +2,20 @@
 pragma solidity ^0.8.26;
 
 import {AIRiskGuardHook} from "../src/AIRiskGuardHook.sol";
+import {HookDeployer} from "../src/HookDeployer.sol";
 import {IPoolManager} from "@uniswap/v4-core/src/interfaces/IPoolManager.sol";
 
-/// @notice X Layer testnet deployment sketch.
-/// @dev For a real v4 pool, mine a CREATE2 salt so the deployed hook address has
-/// the BEFORE_SWAP flag expected by Uniswap v4 Hooks.validateHookPermissions.
+/// @notice Reference deployment wrapper for X Layer.
+/// @dev This file is intentionally forge-std-free so the repo can compile without
+/// git submodules. Use HookDeployer plus scripts/mine-hook-address.mjs in practice.
 contract DeployAIRiskGuardHook {
-    address internal constant XLAYER_TESTNET_POOL_MANAGER_PLACEHOLDER = address(0);
+    address internal constant XLAYER_MAINNET_POOL_MANAGER = 0x360e68faccca8ca495c1b759fd9eee466db9fb32;
 
-    function deploy(address poolManager, address owner) external returns (AIRiskGuardHook hook) {
-        require(poolManager != XLAYER_TESTNET_POOL_MANAGER_PLACEHOLDER, "set X Layer PoolManager");
-        hook = new AIRiskGuardHook(IPoolManager(poolManager), owner);
+    function deployFactory() external returns (HookDeployer deployer) {
+        deployer = new HookDeployer();
+    }
+
+    function deployHook(HookDeployer deployer, bytes32 salt, address owner) external returns (AIRiskGuardHook hook) {
+        hook = deployer.deployAIRiskGuardHook(salt, IPoolManager(XLAYER_MAINNET_POOL_MANAGER), owner);
     }
 }
