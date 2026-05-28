@@ -96,6 +96,10 @@ Fill these after live deployment:
 | HookDeployer tx | |
 | AI Risk Guard Hook address | |
 | Hook deployment tx | |
+| Token0 | |
+| Token0 deployment tx | |
+| Token1 | |
+| Token1 deployment tx | |
 | Pool address / PoolId | |
 | Pool initialization tx | |
 | Policy configuration tx | |

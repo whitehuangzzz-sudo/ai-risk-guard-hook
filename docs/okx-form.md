@@ -58,6 +58,10 @@ HookDeployer address: fill_after_deploy
 HookDeployer tx: fill_after_deploy
 AI Risk Guard Hook address: fill_after_deploy
 Hook deployment tx: fill_after_deploy
+Token0: fill_after_token_selection
+Token0 deployment tx: fill_after_token_deploy
+Token1: fill_after_token_selection
+Token1 deployment tx: fill_after_token_deploy
 PoolId: fill_after_pool_initialize
 Pool initialization tx: fill_after_pool_initialize
 Policy configuration tx: fill_after_set_policy

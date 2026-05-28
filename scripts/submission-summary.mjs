@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const options = parseArgs(process.argv.slice(2));
 const deploymentPath = options.deployment || "deployments/xlayer-mainnet-latest.json";
+const tokenPath = options.tokens || "deployments/xlayer-demo-tokens-latest.json";
 
 if (!existsSync(deploymentPath)) {
   console.error(`Deployment file not found: ${deploymentPath}`);
@@ -10,11 +11,18 @@ if (!existsSync(deploymentPath)) {
 }
 
 const deployment = JSON.parse(readFileSync(deploymentPath, "utf8"));
+const tokenDeployment = existsSync(tokenPath) ? JSON.parse(readFileSync(tokenPath, "utf8")) : {};
 const links = {
   github: options.github || "fill_after_github_publish",
   demo: options.demo || "fill_after_video_upload",
   xPost: options.x || "fill_after_x_post",
   verify: options.verify || "fill_after_verify",
+};
+const tokens = {
+  token0: options.token0 || tokenDeployment.token0 || "fill_after_token_selection",
+  token1: options.token1 || tokenDeployment.token1 || "fill_after_token_selection",
+  token0Tx: options.token0Tx || findTokenTx(tokenDeployment, tokenDeployment.token0) || "fill_after_token_deploy",
+  token1Tx: options.token1Tx || findTokenTx(tokenDeployment, tokenDeployment.token1) || "fill_after_token_deploy",
 };
 const pool = {
   id: options.poolId || "fill_after_pool_initialize",
@@ -33,6 +41,10 @@ const lines = [
   `| AI Risk Guard Hook address | \`${deployment.hookAddress || ""}\` |`,
   `| Hook deployment tx | \`${deployment.hookDeployTx || ""}\` |`,
   `| Hook salt | \`${deployment.hookSaltHex || ""}\` |`,
+  `| Token0 | \`${tokens.token0}\` |`,
+  `| Token0 deployment tx | \`${tokens.token0Tx}\` |`,
+  `| Token1 | \`${tokens.token1}\` |`,
+  `| Token1 deployment tx | \`${tokens.token1Tx}\` |`,
   `| PoolId | \`${pool.id}\` |`,
   `| Pool initialization tx | \`${pool.initTx}\` |`,
   `| Policy configuration tx | \`${pool.policyTx}\` |`,
@@ -59,6 +71,10 @@ const lines = [
   `HookDeployer tx: ${deployment.hookDeployerTx || ""}`,
   `AI Risk Guard Hook address: ${deployment.hookAddress || ""}`,
   `Hook deployment tx: ${deployment.hookDeployTx || ""}`,
+  `Token0: ${tokens.token0}`,
+  `Token0 deployment tx: ${tokens.token0Tx}`,
+  `Token1: ${tokens.token1}`,
+  `Token1 deployment tx: ${tokens.token1Tx}`,
   `PoolId: ${pool.id}`,
   `Pool initialization tx: ${pool.initTx}`,
   `Policy configuration tx: ${pool.policyTx}`,
@@ -100,4 +116,12 @@ function parseArgs(args) {
 
 function toCamelCase(value) {
   return value.replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+}
+
+function findTokenTx(tokenDeployment, address) {
+  if (!address) return "";
+  const token = [tokenDeployment.tokenA, tokenDeployment.tokenB].find(
+    (candidate) => candidate?.address?.toLowerCase() === address.toLowerCase(),
+  );
+  return token?.tx || "";
 }

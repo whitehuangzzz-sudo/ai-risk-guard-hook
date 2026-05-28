@@ -184,7 +184,26 @@ npm run submission:finalize -- \
   --x "$X_ANNOUNCEMENT_URL"
 ```
 
-This writes `deployments/submission-summary.md`.
+If you used `npm run deploy:demo-tokens`, this command reads token evidence from `deployments/xlayer-demo-tokens-latest.json` automatically.
+
+If you used an external pair, pass token evidence manually:
+
+```bash
+npm run submission:finalize -- \
+  --token0 "$TOKEN0" \
+  --token1 "$TOKEN1" \
+  --token0-tx "$TOKEN0_DEPLOY_TX" \
+  --token1-tx "$TOKEN1_DEPLOY_TX" \
+  --github "https://github.com/<your-user>/ai-risk-guard-hook" \
+  --pool-id "$POOL_ID" \
+  --pool-init-tx "$POOL_INIT_TX" \
+  --policy-tx "$POLICY_TX" \
+  --verify "$CONTRACT_VERIFICATION_URL" \
+  --demo "$DEMO_VIDEO_URL" \
+  --x "$X_ANNOUNCEMENT_URL"
+```
+
+Both forms write `deployments/submission-summary.md`.
 
 ## 8. Record Demo
 
