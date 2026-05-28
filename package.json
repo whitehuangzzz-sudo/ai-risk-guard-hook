@@ -17,6 +17,7 @@
     "wallet:check": "node scripts/wallet-check.mjs",
     "submission:summary": "node scripts/submission-summary.mjs",
     "submission:finalize": "node scripts/submission-summary.mjs",
+    "submission:check": "node scripts/check-submission-ready.mjs",
     "mine:hook": "node scripts/mine-hook-address.mjs",
     "pool:init": "node scripts/encode-pool-init-calldata.mjs",
     "policy:calldata": "node scripts/encode-policy-calldata.mjs",

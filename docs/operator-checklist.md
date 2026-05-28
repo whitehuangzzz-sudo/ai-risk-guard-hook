@@ -221,6 +221,22 @@ npm run submission:finalize -- \
 
 Both forms write `deployments/submission-summary.md`.
 
+Run the final pre-submit checker:
+
+```bash
+npm run submission:check -- \
+  --github "https://github.com/<your-user>/ai-risk-guard-hook" \
+  --verify "$CONTRACT_VERIFICATION_URL" \
+  --demo "$DEMO_VIDEO_URL" \
+  --x "$X_ANNOUNCEMENT_URL"
+```
+
+Expected:
+
+```text
+"status": "ready"
+```
+
 ## 8. Record Demo
 
 Use `docs/demo-video-script.md`.
