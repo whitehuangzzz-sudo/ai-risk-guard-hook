@@ -265,6 +265,7 @@ This writes `PUBLIC_SUBMISSION.md`.
 Run the final pre-submit checker:
 
 ```bash
+npm run submission:prepublish -- --final
 npm run submission:check -- \
   --github "https://github.com/<your-user>/ai-risk-guard-hook" \
   --verify "$CONTRACT_VERIFICATION_URL" \

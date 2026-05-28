@@ -40,6 +40,12 @@ git push -u origin main
 
 ## Before Sharing
 
+- Run the prepublish safety check:
+
+```bash
+npm run submission:prepublish
+```
+
 - Confirm `.env` is not committed.
 - Confirm `deployments/` is not committed.
 - Confirm README shows the demo screenshot.
@@ -56,6 +62,12 @@ npm run submission:public -- \
 git add PUBLIC_SUBMISSION.md
 git commit -m "docs: add public deployment evidence"
 git push
+```
+
+Before the final OKX form submission, run:
+
+```bash
+npm run submission:prepublish -- --final
 ```
 
 ## Links To Submit

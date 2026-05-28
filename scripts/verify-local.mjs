@@ -61,6 +61,7 @@ const commands = [
   ["npm", ["run", "operator:next"]],
   ["npm", ["run", "deploy:demo-tokens", "--", "--dry-run", "--skip-build"]],
   ["npm", ["run", "pool:configure", "--", "--dry-run"]],
+  ["npm", ["run", "submission:prepublish"]],
   [
     "npm",
     [
