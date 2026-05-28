@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 const files = {
   env: ".env",
@@ -8,17 +8,35 @@ const files = {
   summary: "deployments/submission-summary.md",
   explorerLinks: "deployments/explorer-links.md",
   publicSubmission: "PUBLIC_SUBMISSION.md",
+  socialPosts: "deployments/social-posts.md",
 };
 const args = parseArgs(process.argv.slice(2));
 const linksProvided = Boolean(args.github && args.verify && args.demo && args.x);
+const deployment = readJson(files.hook);
+const tokens = readJson(files.tokens);
+const pool = readJson(files.pool);
 const evidence = {
   env: existsSync(files.env),
-  hookDeployment: existsSync(files.hook),
-  demoTokens: existsSync(files.tokens),
-  demoPool: existsSync(files.pool),
-  submissionSummary: existsSync(files.summary),
-  explorerLinks: existsSync(files.explorerLinks),
-  publicSubmission: existsSync(files.publicSubmission),
+  hookDeployment: hasLiveHookDeployment(deployment),
+  demoTokens: hasLiveTokenDeployment(tokens),
+  demoPool: hasLivePoolDeployment(pool, deployment, tokens),
+  submissionSummary: hasFreshMarkdown(files.summary, [deployment?.hookAddress, deployment?.hookDeployTx, pool?.poolId, pool?.policyTx]),
+  explorerLinks: hasFreshMarkdown(files.explorerLinks, [
+    deployment?.hookAddress,
+    deployment?.hookDeployTx,
+    tokens?.token0,
+    tokens?.token1,
+    pool?.poolInitTx,
+    pool?.policyTx,
+  ]),
+  publicSubmission: hasFreshMarkdown(files.publicSubmission, [
+    deployment?.hookAddress,
+    deployment?.hookDeployTx,
+    pool?.poolId,
+    pool?.poolInitTx,
+    pool?.policyTx,
+  ]),
+  socialPosts: hasFreshMarkdown(files.socialPosts, [deployment?.hookAddress, pool?.poolId], true),
 };
 const nextStep = resolveNextStep(evidence, linksProvided);
 
@@ -100,6 +118,15 @@ function resolveNextStep(currentEvidence, hasLinks) {
     };
   }
 
+  if (!currentEvidence.socialPosts) {
+    return {
+      step: "social",
+      commands: [
+        'npm run submission:social -- --github "$GITHUB_URL" --demo "$DEMO_VIDEO_URL" --public "$PUBLIC_SUBMISSION_URL"',
+      ],
+    };
+  }
+
   return {
     step: "check",
     commands: [
@@ -132,4 +159,80 @@ function toCamelCase(value) {
 
 function print(value) {
   console.log(JSON.stringify(value, null, 2));
+}
+
+function readJson(path) {
+  if (!existsSync(path)) return null;
+
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function hasLiveHookDeployment(value) {
+  return (
+    value?.chainId === 196 &&
+    isAddressLike(value.poolManager) &&
+    isAddressLike(value.hookDeployerAddress) &&
+    isAddressLike(value.hookAddress) &&
+    isBytes32(value.hookDeployerTx) &&
+    isBytes32(value.hookDeployTx) &&
+    isBytes32(value.hookSaltHex)
+  );
+}
+
+function hasLiveTokenDeployment(value) {
+  return (
+    value?.chainId === 196 &&
+    isAddressLike(value.token0) &&
+    isAddressLike(value.token1) &&
+    value.token0.toLowerCase() !== value.token1.toLowerCase() &&
+    isBytes32(findTokenTx(value, value.token0)) &&
+    isBytes32(findTokenTx(value, value.token1))
+  );
+}
+
+function hasLivePoolDeployment(value, hookDeployment, tokenDeployment) {
+  return (
+    value?.chainId === 196 &&
+    isBytes32(value.poolId) &&
+    isBytes32(value.poolInitTx) &&
+    isBytes32(value.policyTx) &&
+    isBytes32(value.aiPolicyHash) &&
+    value.poolManager?.toLowerCase() === hookDeployment?.poolManager?.toLowerCase() &&
+    value.hookAddress?.toLowerCase() === hookDeployment?.hookAddress?.toLowerCase() &&
+    value.poolKey?.currency0?.toLowerCase() === tokenDeployment?.token0?.toLowerCase() &&
+    value.poolKey?.currency1?.toLowerCase() === tokenDeployment?.token1?.toLowerCase()
+  );
+}
+
+function hasFreshMarkdown(path, requiredValues, allowMissingLinks = false) {
+  if (!existsSync(path)) return false;
+
+  const text = readFileSync(path, "utf8");
+  if (/fill_after|replace_with|0xmock/i.test(text)) return false;
+  if (!allowMissingLinks && /https:\/\/github\.com\/example|https:\/\/youtu\.be\/demo|https:\/\/x\.com\/example/i.test(text)) {
+    return false;
+  }
+
+  const concreteValues = requiredValues.filter(Boolean);
+  return concreteValues.length > 0 && concreteValues.every((value) => text.toLowerCase().includes(value.toLowerCase()));
+}
+
+function findTokenTx(tokenDeployment, address) {
+  if (!address) return "";
+  const token = [tokenDeployment?.tokenA, tokenDeployment?.tokenB].find(
+    (candidate) => candidate?.address?.toLowerCase() === address.toLowerCase(),
+  );
+  return token?.tx || "";
+}
+
+function isAddressLike(value) {
+  return typeof value === "string" && /^0x[0-9a-fA-F]{40}$/.test(value);
+}
+
+function isBytes32(value) {
+  return typeof value === "string" && /^0x[0-9a-fA-F]{64}$/.test(value);
 }
