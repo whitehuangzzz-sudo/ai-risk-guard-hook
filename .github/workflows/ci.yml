@@ -8,17 +8,25 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
 
-      - uses: foundry-rs/foundry-toolchain@v1
+      - name: Setup Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
 
-      - run: npm ci
+      - name: Install root dependencies
+        run: npm ci
 
-      - run: npm --prefix app ci
+      - name: Install app dependencies
+        run: npm --prefix app ci
 
-      - run: npm run verify
+      - name: Verify
+        run: npm run verify

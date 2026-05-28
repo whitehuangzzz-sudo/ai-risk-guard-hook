@@ -14,7 +14,7 @@ AI Risk Guard Hook is an OKX Hook the Future hackathon project for X Layer. It t
 | CREATE2 deployment | Implemented in `src/HookDeployer.sol` and `scripts/deploy-xlayer.mjs` |
 | Tests | `9 passed, 0 failed` with real Uniswap v4 imports |
 | Demo app | Implemented in `app/` |
-| Submission docs | `SUBMISSION.md`, `docs/operator-checklist.md`, `docs/demo-video-script.md` |
+| Submission docs | `SUBMISSION.md`, `docs/okx-form.md`, `docs/operator-checklist.md`, `docs/demo-video-script.md` |
 | Live deployment | Requires funded X Layer wallet and final Pool/Hook addresses |
 
 ## Quick Start
@@ -154,7 +154,7 @@ npm run submission:summary
 5. Create or initialize the dynamic-fee v4 pool with the deployed Hook.
 6. Run `npm run policy:calldata` for the real PoolKey, then submit the `setPolicy` transaction.
 7. Record the demo using `docs/demo-video-script.md`.
-8. Fill `SUBMISSION.md`, publish the X post, and submit the OKX form.
+8. Fill `SUBMISSION.md` and `docs/okx-form.md`, publish the X post, and submit the OKX form.
 
 ## Demo Script
 
@@ -169,6 +169,8 @@ See `docs/demo-video-script.md` for a 90-120 second recording script.
 - Announce the project from a dedicated X account and tag `@XLayerOfficial`, `@Uniswap`, and `@flapdotsh`.
 
 See `SUBMISSION.md` for the final submission pack, suggested X post, and address table.
+
+Use `docs/okx-form.md` for copy-ready OKX form fields.
 
 If the deployer wallet is ready, follow `docs/operator-checklist.md`.
 

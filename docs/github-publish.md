@@ -44,7 +44,7 @@ git push -u origin main
 - Confirm `deployments/` is not committed.
 - Confirm README shows the demo screenshot.
 - Confirm GitHub Actions CI runs successfully.
-- Add the final Hook/Pool addresses to `SUBMISSION.md` after deployment.
+- Add the final Hook/Pool addresses to `SUBMISSION.md` and `docs/okx-form.md` after deployment.
 
 ## Links To Submit
 
@@ -53,3 +53,5 @@ git push -u origin main
 - Pool or PoolId evidence.
 - Demo video URL.
 - X announcement URL.
+
+Use `docs/okx-form.md` for the copy-ready project description, technical highlights, and final form fields.

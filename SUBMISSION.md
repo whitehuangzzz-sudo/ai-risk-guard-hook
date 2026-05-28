@@ -58,6 +58,7 @@ AI Risk Guard Hook wraps Hook policy authoring in a retail-friendly flow:
 - Deployment runbook: `docs/deployment.md`
 - Operator checklist: `docs/operator-checklist.md`
 - GitHub publish checklist: `docs/github-publish.md`
+- OKX form copy pack: `docs/okx-form.md`
 - Demo screenshot: `docs/assets/demo-screenshot.png`
 
 ## Verification Commands

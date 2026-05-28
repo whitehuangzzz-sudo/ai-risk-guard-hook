@@ -183,6 +183,6 @@ Save:
 
 Submit before `2026-05-28 23:59 UTC`.
 
-Fill the table in `SUBMISSION.md` before submitting.
+Fill the table in `SUBMISSION.md` and the placeholders in `docs/okx-form.md` before submitting.
 
 If the repository is not public yet, follow `docs/github-publish.md` before filling the form.
