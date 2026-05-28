@@ -29,6 +29,16 @@ Fill:
 
 ## Step 1: Deploy HookDeployer
 
+Fast path:
+
+```bash
+npm run deploy:xlayer
+```
+
+This deploys `HookDeployer`, mines a valid Hook address, deploys `AIRiskGuardHook`, and writes deployment evidence to `deployments/xlayer-mainnet-latest.json`.
+
+Manual path:
+
 `HookDeployer` is a small CREATE2 factory. Deploy it normally first:
 
 ```bash

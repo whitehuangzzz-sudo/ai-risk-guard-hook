@@ -37,6 +37,16 @@ Expected: `Local verification passed.`
 
 ## 3. Deploy HookDeployer
 
+Fast path:
+
+```bash
+npm run deploy:xlayer
+```
+
+This deploys `HookDeployer`, mines a valid `BEFORE_SWAP` Hook address, deploys `AIRiskGuardHook`, and writes non-secret output to `deployments/xlayer-mainnet-latest.json`.
+
+Manual path:
+
 ```bash
 forge create src/HookDeployer.sol:HookDeployer \
   --rpc-url "$XLAYER_MAINNET_RPC_URL" \
@@ -56,6 +66,8 @@ export HOOK_DEPLOYER_ADDRESS=replace_with_deployed_factory
 ```
 
 ## 4. Mine Hook Address
+
+Skip this if you used `npm run deploy:xlayer`.
 
 ```bash
 npm run mine:hook -- \
@@ -78,6 +90,8 @@ export SALT_HEX=replace_with_salt_hex
 ```
 
 ## 5. Deploy Hook
+
+Skip this if you used `npm run deploy:xlayer`.
 
 ```bash
 cast send "$HOOK_DEPLOYER_ADDRESS" \

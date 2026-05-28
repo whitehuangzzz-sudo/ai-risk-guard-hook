@@ -11,6 +11,7 @@
     "test": "forge test",
     "build": "forge build",
     "verify": "node scripts/verify-local.mjs",
+    "deploy:xlayer": "node scripts/deploy-xlayer.mjs",
     "mine:hook": "node scripts/mine-hook-address.mjs",
     "policy:calldata": "node scripts/encode-policy-calldata.mjs",
     "app:dev": "npm --prefix app run dev",

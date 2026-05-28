@@ -9,7 +9,7 @@ import {IPoolManager} from "@uniswap/v4-core/src/interfaces/IPoolManager.sol";
 /// @dev This file is intentionally forge-std-free so the repo can compile without
 /// git submodules. Use HookDeployer plus scripts/mine-hook-address.mjs in practice.
 contract DeployAIRiskGuardHook {
-    address internal constant XLAYER_MAINNET_POOL_MANAGER = 0x360e68faccca8ca495c1b759fd9eee466db9fb32;
+    address internal constant XLAYER_MAINNET_POOL_MANAGER = 0x360E68faCcca8cA495c1B759Fd9EEe466db9FB32;
 
     function deployFactory() external returns (HookDeployer deployer) {
         deployer = new HookDeployer();
