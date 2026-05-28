@@ -1,4 +1,4 @@
-import { AlertTriangle, Brain, CheckCircle2, Gauge, Shield, XCircle } from "lucide-react";
+import { AlertTriangle, Brain, CheckCircle2, Code2, Gauge, Shield, XCircle } from "lucide-react";
 import { useMemo, useState } from "react";
 
 type RiskMode = "Normal" | "Elevated" | "Blocked";
@@ -10,6 +10,8 @@ type Policy = {
   mode: RiskMode;
   hash: string;
 };
+
+const xLayerPoolManager = "0x360e68...9fb32";
 
 const examples = [
   "Keep swaps small and raise fees when volatility spikes.",
@@ -159,6 +161,33 @@ export function App() {
             <div>
               <strong>{decision.label}</strong>
               <p>{decision.detail}</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="proof">
+          <div>
+            <div className="panelTitle">
+              <Code2 size={20} />
+              Contract Proof
+            </div>
+            <p>
+              Real Uniswap v4 imports, `beforeSwap` permission, dynamic-fee override, CREATE2 Hook
+              address mining.
+            </p>
+          </div>
+          <div className="proofGrid">
+            <div>
+              <span>Tests</span>
+              <strong>9 passing</strong>
+            </div>
+            <div>
+              <span>X Layer PoolManager</span>
+              <strong>{xLayerPoolManager}</strong>
+            </div>
+            <div>
+              <span>Pool fee mode</span>
+              <strong>0x800000 dynamic</strong>
             </div>
           </div>
         </section>

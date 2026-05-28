@@ -72,13 +72,7 @@ npm run mine:hook -- "$HOOK_DEPLOYER_ADDRESS" "$XLAYER_MAINNET_POOL_MANAGER" "$O
 
 ## Demo Script
 
-1. Show the app and type: "Keep swaps small and raise fees when volatility spikes."
-2. Point to the compiled policy: max exact input, normal fee, elevated fee, policy hash.
-3. Move the swap slider below the max. The Hook preview returns "Allowed."
-4. Switch to elevated risk. The Hook preview still allows the swap but returns a higher dynamic fee.
-5. Move the swap above the max. The Hook preview rejects the swap.
-6. Switch to blocked risk. The Hook preview shows the circuit breaker.
-7. Show `forge test` passing against the real Uniswap v4 Hook imports.
+See `docs/demo-video-script.md` for a 90-120 second recording script.
 
 ## Hackathon Checklist
 
@@ -87,6 +81,8 @@ npm run mine:hook -- "$HOOK_DEPLOYER_ADDRESS" "$XLAYER_MAINNET_POOL_MANAGER" "$O
 - Record a short demo video.
 - Submit the repository, demo, and contract addresses through the OKX event page.
 - Announce the project from a dedicated X account and tag `@XLayerOfficial`, `@Uniswap`, and `@flapdotsh`.
+
+See `SUBMISSION.md` for the final submission pack, suggested X post, and address table.
 
 ## Current Status
 
