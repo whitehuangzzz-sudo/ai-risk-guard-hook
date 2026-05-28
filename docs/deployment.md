@@ -29,6 +29,12 @@ Fill:
 
 The deployment script reads `.env` automatically. Shell environment variables override `.env` values.
 
+Check wallet/RPC readiness without broadcasting:
+
+```bash
+npm run wallet:check
+```
+
 ## Step 1: Deploy HookDeployer
 
 Fast path:

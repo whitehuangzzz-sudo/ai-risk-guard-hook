@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import {
   concatHex,
@@ -8,12 +8,12 @@ import {
   encodeFunctionData,
   getCreate2Address,
   http,
-  isAddress,
   keccak256,
   padHex,
   toHex,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
+import { loadDotEnv, normalizeAddress, normalizePrivateKey, requiredEnv } from "./env-utils.mjs";
 
 const BEFORE_SWAP_FLAG = 1 << 7;
 const ALL_HOOK_MASK = (1 << 14) - 1;
@@ -171,48 +171,4 @@ function readArtifact(path) {
 
 function bytecodeOf(artifact) {
   return artifact.bytecode.object.startsWith("0x") ? artifact.bytecode.object : `0x${artifact.bytecode.object}`;
-}
-
-function requiredEnv(name) {
-  const value = process.env[name];
-  if (!value) throw new Error(`${name} is required`);
-  return value;
-}
-
-function loadDotEnv(path) {
-  if (!existsSync(path)) return;
-
-  const lines = readFileSync(path, "utf8").split(/\r?\n/);
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("#")) continue;
-
-    const equalsIndex = trimmed.indexOf("=");
-    if (equalsIndex === -1) continue;
-
-    const key = trimmed.slice(0, equalsIndex).trim();
-    let value = trimmed.slice(equalsIndex + 1).trim();
-    if (!key || process.env[key] !== undefined) continue;
-
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
-      value = value.slice(1, -1);
-    }
-
-    process.env[key] = value;
-  }
-}
-
-function normalizeAddress(label, value) {
-  const normalized = value.toLowerCase();
-  if (!isAddress(normalized, { strict: false })) throw new Error(`Invalid ${label} address: ${value}`);
-  return normalized;
-}
-
-function normalizePrivateKey(value) {
-  const normalized = value.startsWith("0x") ? value : `0x${value}`;
-  if (!/^0x[0-9a-fA-F]{64}$/.test(normalized)) throw new Error("PRIVATE_KEY must be a 32-byte hex string");
-  return normalized;
 }

@@ -25,15 +25,20 @@ Fill:
 
 ```bash
 npm run verify
+npm run wallet:check
 ```
 
-Expected: `Local verification passed.`
+Expected:
+
+- `Local verification passed.`
+- `wallet:check` reports chain id `196`, matching owner/private key, and non-zero gas balance.
 
 ## 3. Deploy HookDeployer
 
 Fast path:
 
 ```bash
+npm run wallet:check
 npm run deploy:xlayer
 ```
 
@@ -173,3 +178,5 @@ Save:
 Submit before `2026-05-28 23:59 UTC`.
 
 Fill the table in `SUBMISSION.md` before submitting.
+
+If the repository is not public yet, follow `docs/github-publish.md` before filling the form.

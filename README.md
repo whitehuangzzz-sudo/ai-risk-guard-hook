@@ -87,6 +87,7 @@ npm run policy:calldata -- "$HOOK_ADDRESS" "$TOKEN0" "$TOKEN1" 60 1000000000 500
 Deploy the Hook stack from a local wallet environment:
 
 ```bash
+npm run wallet:check
 npm run deploy:xlayer
 ```
 
@@ -111,6 +112,8 @@ See `docs/demo-video-script.md` for a 90-120 second recording script.
 See `SUBMISSION.md` for the final submission pack, suggested X post, and address table.
 
 If the deployer wallet is ready, follow `docs/operator-checklist.md`.
+
+For GitHub publishing, follow `docs/github-publish.md`.
 
 ## Current Status
 
