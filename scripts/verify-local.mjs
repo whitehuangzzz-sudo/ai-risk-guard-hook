@@ -11,6 +11,7 @@ writeFileSync(
       hookDeployerAddress: "0x1111111111111111111111111111111111111111",
       hookDeployerTx: "0xmockHookDeployerTx",
       hookAddress: "0xabdE3870CD4a1CE8Bb761963b2080e21AC9d8080",
+      owner: "0x2222222222222222222222222222222222222222",
       hookSaltHex: "0x0000000000000000000000000000000000000000000000000000000000007e0e",
       hookDeployTx: "0xmockHookDeployTx",
     },
@@ -62,6 +63,16 @@ const commands = [
   ["npm", ["run", "deploy:demo-tokens", "--", "--dry-run", "--skip-build"]],
   ["npm", ["run", "pool:configure", "--", "--dry-run"]],
   ["npm", ["run", "submission:prepublish"]],
+  [
+    "npm",
+    [
+      "run",
+      "submission:verify-commands",
+      "--",
+      "--deployment",
+      "deployments/mock/deployment.json",
+    ],
+  ],
   [
     "npm",
     [

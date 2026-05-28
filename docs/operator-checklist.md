@@ -58,6 +58,14 @@ Then generate the copy-ready submission summary:
 npm run submission:summary
 ```
 
+Generate OKLink verification commands:
+
+```bash
+npm run submission:verify-commands
+```
+
+This writes `deployments/verification-commands.md`. After OKLink verification succeeds, save the Hook verification URL as `CONTRACT_VERIFICATION_URL`.
+
 ## 3A. Deploy Demo Tokens If Needed
 
 If you do not already have two ERC20 tokens for the demo pool, deploy the included demo pair:

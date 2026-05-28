@@ -51,6 +51,14 @@ Create a submission summary from the deployment output:
 npm run submission:summary
 ```
 
+Generate OKLink verification commands:
+
+```bash
+npm run submission:verify-commands
+```
+
+This writes `deployments/verification-commands.md`. Wait at least one minute after deployment before running the printed `forge verify-contract` commands with `--watch`.
+
 Manual path:
 
 `HookDeployer` is a small CREATE2 factory. Deploy it normally first:
