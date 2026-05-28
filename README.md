@@ -70,6 +70,12 @@ Mine a v4-valid Hook address after deploying `HookDeployer`:
 npm run mine:hook -- "$HOOK_DEPLOYER_ADDRESS" "$XLAYER_MAINNET_POOL_MANAGER" "$OWNER_ADDRESS"
 ```
 
+Generate `setPolicy` and `setRiskMode` calldata:
+
+```bash
+npm run policy:calldata -- "$HOOK_ADDRESS" "$TOKEN0" "$TOKEN1" 60 1000000000 500 3000 0 "Keep swaps small and raise fees when volatility spikes."
+```
+
 ## Demo Script
 
 See `docs/demo-video-script.md` for a 90-120 second recording script.

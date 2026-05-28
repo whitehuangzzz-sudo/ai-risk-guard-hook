@@ -11,6 +11,7 @@
     "test": "forge test",
     "build": "forge build",
     "mine:hook": "node scripts/mine-hook-address.mjs",
+    "policy:calldata": "node scripts/encode-policy-calldata.mjs",
     "app:dev": "npm --prefix app run dev",
     "app:build": "npm --prefix app run build"
   },

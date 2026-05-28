@@ -59,6 +59,7 @@ The script prints:
 - integer salt;
 - `bytes32` salt;
 - exact `deployAIRiskGuardHook(...)` call shape.
+- ABI calldata for the `deployAIRiskGuardHook(...)` call.
 
 ## Step 3: Deploy the Hook Through CREATE2
 
@@ -88,13 +89,35 @@ The Hook returns dynamic LP fee overrides only for dynamic-fee pools.
 
 ## Step 5: Configure Policy
 
-After pool creation, call `setPolicy` with the exact `PoolKey`, for example:
+After pool creation, generate `setPolicy` calldata with the exact `PoolKey`, for example:
 
 - max exact input amount: `1000000000` for a 1,000 USDT limit on a 6-decimal token;
 - normal fee: `500` for 0.05%;
 - elevated fee: `3000` for 0.3%;
 - risk mode: `0` for Normal;
 - AI policy hash: hash of the prompt or policy JSON.
+
+```bash
+npm run policy:calldata -- \
+  "$HOOK_ADDRESS" \
+  "$TOKEN0" \
+  "$TOKEN1" \
+  60 \
+  1000000000 \
+  500 \
+  3000 \
+  0 \
+  "Keep swaps small and raise fees when volatility spikes."
+```
+
+The script prints:
+
+- `PoolKey`;
+- `PoolId`;
+- AI policy hash;
+- `setPolicy` calldata;
+- `setRiskMode` calldata for Normal, Elevated, and Blocked;
+- copy-ready `cast send` commands.
 
 Use `setRiskMode` during the demo to switch between Normal, Elevated, and Blocked modes.
 

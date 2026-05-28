@@ -1,5 +1,14 @@
 import { readFileSync } from "node:fs";
-import { concatHex, encodeAbiParameters, getCreate2Address, isAddress, keccak256, padHex, toHex } from "viem";
+import {
+  concatHex,
+  encodeAbiParameters,
+  encodeFunctionData,
+  getCreate2Address,
+  isAddress,
+  keccak256,
+  padHex,
+  toHex,
+} from "viem";
 
 const BEFORE_SWAP_FLAG = 1 << 7;
 const ALL_HOOK_MASK = (1 << 14) - 1;
@@ -37,6 +46,19 @@ const constructorArgs = encodeAbiParameters(
 );
 const initCode = concatHex([bytecode, constructorArgs]);
 const initCodeHash = keccak256(initCode);
+const deployAbi = [
+  {
+    type: "function",
+    name: "deployAIRiskGuardHook",
+    stateMutability: "nonpayable",
+    inputs: [
+      { name: "salt", type: "bytes32" },
+      { name: "poolManager", type: "address" },
+      { name: "owner", type: "address" },
+    ],
+    outputs: [{ name: "hook", type: "address" }],
+  },
+];
 
 for (let salt = 0; salt < MAX_LOOP; salt += 1) {
   const saltHex = padHex(toHex(salt), { size: 32 });
@@ -54,6 +76,11 @@ for (let salt = 0; salt < MAX_LOOP; salt += 1) {
           saltHex,
           flags: "BEFORE_SWAP",
           deployCall: `deployAIRiskGuardHook(${saltHex}, ${normalizedPoolManager}, ${normalizedOwner})`,
+          deployCalldata: encodeFunctionData({
+            abi: deployAbi,
+            functionName: "deployAIRiskGuardHook",
+            args: [saltHex, normalizedPoolManager, normalizedOwner],
+          }),
         },
         null,
         2,
