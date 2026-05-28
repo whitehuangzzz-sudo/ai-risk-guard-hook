@@ -45,7 +45,7 @@ git push -u origin main
 - Confirm README shows the demo screenshot.
 - Confirm GitHub Actions CI runs successfully.
 - Add the final Hook/Pool addresses to `SUBMISSION.md` and `docs/okx-form.md` after deployment.
-- Generate and commit `PUBLIC_SUBMISSION.md` after live deployment:
+- After live deployment, demo recording, and X announcement, generate and commit `PUBLIC_SUBMISSION.md`:
 
 ```bash
 npm run submission:public -- \

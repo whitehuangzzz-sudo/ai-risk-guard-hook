@@ -195,6 +195,27 @@ Save:
 
 - Policy configuration transaction hash
 
+Generate explorer links for README, video description, and the OKX form:
+
+```bash
+npm run submission:links
+```
+
+This writes `deployments/explorer-links.md`.
+
+Record the demo video before publishing the X post. Use `docs/demo-video-script.md`.
+
+Generate X post and video-description copy. `PUBLIC_SUBMISSION_URL` can be the future GitHub URL for `PUBLIC_SUBMISSION.md` before the file is committed:
+
+```bash
+npm run submission:social -- \
+  --github "https://github.com/<your-user>/ai-risk-guard-hook" \
+  --demo "$DEMO_VIDEO_URL" \
+  --public "https://github.com/<your-user>/ai-risk-guard-hook/blob/main/PUBLIC_SUBMISSION.md"
+```
+
+This writes `deployments/social-posts.md`. Publish the X post and save the resulting `X_ANNOUNCEMENT_URL`.
+
 Regenerate the final copy-ready submission summary with public links and on-chain evidence:
 
 ```bash
@@ -229,14 +250,6 @@ npm run submission:finalize -- \
 
 Both forms write `deployments/submission-summary.md`.
 
-Generate explorer links for README, video description, and the OKX form:
-
-```bash
-npm run submission:links
-```
-
-This writes `deployments/explorer-links.md`.
-
 Generate a public evidence page that can be committed to GitHub:
 
 ```bash
@@ -248,17 +261,6 @@ npm run submission:public -- \
 ```
 
 This writes `PUBLIC_SUBMISSION.md`.
-
-Generate X post and video-description copy:
-
-```bash
-npm run submission:social -- \
-  --github "https://github.com/<your-user>/ai-risk-guard-hook" \
-  --demo "$DEMO_VIDEO_URL" \
-  --public "https://github.com/<your-user>/ai-risk-guard-hook/blob/main/PUBLIC_SUBMISSION.md"
-```
-
-This writes `deployments/social-posts.md`.
 
 Run the final pre-submit checker:
 

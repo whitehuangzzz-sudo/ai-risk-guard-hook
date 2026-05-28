@@ -11,7 +11,8 @@ const files = {
   socialPosts: "deployments/social-posts.md",
 };
 const args = parseArgs(process.argv.slice(2));
-const linksProvided = Boolean(args.github && args.verify && args.demo && args.x);
+const socialInputsProvided = Boolean(args.github && args.demo);
+const finalLinksProvided = Boolean(args.github && args.verify && args.demo && args.x);
 const deployment = readJson(files.hook);
 const tokens = readJson(files.tokens);
 const pool = readJson(files.pool);
@@ -38,7 +39,7 @@ const evidence = {
   ]),
   socialPosts: hasFreshMarkdown(files.socialPosts, [deployment?.hookAddress, pool?.poolId], true),
 };
-const nextStep = resolveNextStep(evidence, linksProvided);
+const nextStep = resolveNextStep(evidence, socialInputsProvided, finalLinksProvided);
 
 if (!nextStep) {
   print({
@@ -60,7 +61,7 @@ print({
   evidence,
 });
 
-function resolveNextStep(currentEvidence, hasLinks) {
+function resolveNextStep(currentEvidence, hasSocialInputs, hasFinalLinks) {
   if (!currentEvidence.env) {
     return {
       step: "env",
@@ -92,19 +93,29 @@ function resolveNextStep(currentEvidence, hasLinks) {
     };
   }
 
-  if (!currentEvidence.submissionSummary || !hasLinks) {
+  if (!currentEvidence.explorerLinks) {
+    return {
+      step: "links",
+      commands: ["npm run submission:links"],
+    };
+  }
+
+  if (!currentEvidence.socialPosts || !hasSocialInputs) {
+    return {
+      step: "social",
+      commands: [
+        'npm run submission:social -- --github "$GITHUB_URL" --demo "$DEMO_VIDEO_URL" --public "$PUBLIC_SUBMISSION_URL"',
+        "Post to X, then save the resulting X post URL as X_ANNOUNCEMENT_URL.",
+      ],
+    };
+  }
+
+  if (!currentEvidence.submissionSummary || !hasFinalLinks) {
     return {
       step: "summary",
       commands: [
         'npm run submission:finalize -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
       ],
-    };
-  }
-
-  if (!currentEvidence.explorerLinks) {
-    return {
-      step: "links",
-      commands: ["npm run submission:links"],
     };
   }
 
@@ -114,15 +125,6 @@ function resolveNextStep(currentEvidence, hasLinks) {
       commands: [
         'npm run submission:public -- --github "$GITHUB_URL" --verify "$CONTRACT_VERIFICATION_URL" --demo "$DEMO_VIDEO_URL" --x "$X_ANNOUNCEMENT_URL"',
         'git add PUBLIC_SUBMISSION.md && git commit -m "docs: add public deployment evidence"',
-      ],
-    };
-  }
-
-  if (!currentEvidence.socialPosts) {
-    return {
-      step: "social",
-      commands: [
-        'npm run submission:social -- --github "$GITHUB_URL" --demo "$DEMO_VIDEO_URL" --public "$PUBLIC_SUBMISSION_URL"',
       ],
     };
   }

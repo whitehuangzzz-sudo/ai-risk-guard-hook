@@ -156,11 +156,10 @@ npm run deploy:xlayer
 Generate a copy-ready submission summary after deployment:
 
 ```bash
-npm run submission:summary
-npm run submission:finalize -- --github "$GITHUB_URL" --pool-id "$POOL_ID" --pool-init-tx "$POOL_INIT_TX" --policy-tx "$POLICY_TX" --verify "$VERIFY_URL" --demo "$DEMO_URL" --x "$X_URL"
 npm run submission:links
-npm run submission:public -- --github "$GITHUB_URL" --verify "$VERIFY_URL" --demo "$DEMO_URL" --x "$X_URL"
 npm run submission:social -- --github "$GITHUB_URL" --demo "$DEMO_URL" --public "$PUBLIC_SUBMISSION_URL"
+npm run submission:finalize -- --github "$GITHUB_URL" --pool-id "$POOL_ID" --pool-init-tx "$POOL_INIT_TX" --policy-tx "$POLICY_TX" --verify "$VERIFY_URL" --demo "$DEMO_URL" --x "$X_URL"
+npm run submission:public -- --github "$GITHUB_URL" --verify "$VERIFY_URL" --demo "$DEMO_URL" --x "$X_URL"
 ```
 
 ## Submission Flow
@@ -173,7 +172,8 @@ npm run submission:social -- --github "$GITHUB_URL" --demo "$DEMO_URL" --public 
 6. Run `npm run pool:configure` to initialize the dynamic-fee v4 pool and configure the first policy.
 7. Optionally run `npm run pool:init` and `npm run policy:calldata` if you prefer manual calldata submission.
 8. Record the demo using `docs/demo-video-script.md`.
-9. Fill `SUBMISSION.md` and `docs/okx-form.md`, publish the X post, and submit the OKX form.
+9. Generate X copy with `npm run submission:social`, publish the X post, then regenerate final submission/public evidence with the X URL.
+10. Fill `SUBMISSION.md` and `docs/okx-form.md`, and submit the OKX form.
 
 ## Demo Script
 
