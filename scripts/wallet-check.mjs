@@ -21,7 +21,7 @@ try {
 
   const chainId = await publicClient.getChainId();
   const balance = await publicClient.getBalance({ address: account.address });
-  const ownerMatchesPrivateKey = account.address.toLowerCase() === owner;
+  const ownerMatchesPrivateKey = account.address.toLowerCase() === owner.toLowerCase();
 
   console.log(
     JSON.stringify(
